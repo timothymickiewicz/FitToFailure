@@ -1,5 +1,5 @@
 // get all workout data from back-end
-
+// Generates charts
 fetch("/api/workouts/range")
   .then(response => {
     return response.json();

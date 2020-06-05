@@ -1,7 +1,7 @@
 {
   "name": "mongoose_skeleton",
   "version": "1.0.0",
-  "description": "",
+  "description": "General description",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,13 +9,30 @@
     "watch": "nodemon server.js",
     "seed": "node seeders/seed.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Timothy Mickiewicz",
+  "license": "MIT",
   "dependencies": {
     "express": "^4.17.1",
     "mongoose": "^5.3.16",
     "morgan": "^1.9.1",
     "nodemon": "^2.0.4",
     "path": "^0.12.7"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/timothymickiewicz/FitToFailure.git"
+  },
+  "keywords": [
+    "Timothy",
+    "Mickiewicz",
+    "workout",
+    "tracker",
+    "fitness",
+    "exercise"
+  ],
+  "bugs": {
+    "url": "https://github.com/timothymickiewicz/FitToFailure/issues"
+  },
+  "homepage": "https://github.com/timothymickiewicz/FitToFailure#readme"
 }

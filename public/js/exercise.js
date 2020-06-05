@@ -17,14 +17,19 @@ const newWorkout = document.querySelector(".new-workout")
 let workoutType = null;
 let shouldNavigateAway = false;
 
+// This checks if workout exists, otherwise makes a new one
 async function initExercise() {
+  console.log("initializing exercise");
   let workout;
 
   if (location.search.split("=")[1] === undefined) {
+    console.log("exercise not exists, making new");
     workout = await API.createWorkout()
     console.log(workout)
   }
   if (workout) {
+    console.log("exercise exists, getting id");
+    console.log(workout._id);
     location.search = "?id=" + workout._id;
   }
 
@@ -32,6 +37,7 @@ async function initExercise() {
 
 initExercise();
 
+// Alters how the form looks based on dropdown value
 function handleWorkoutTypeChange(event) {
   workoutType = event.target.value;
 
@@ -49,6 +55,7 @@ function handleWorkoutTypeChange(event) {
   validateInputs();
 }
 
+// Checks for values in each field
 function validateInputs() {
   let isValid = true;
 
@@ -95,6 +102,7 @@ function validateInputs() {
   }
 }
 
+// Packages workout data to make the database call, clears inputs, congrats user
 async function handleFormSubmit(event) {
   event.preventDefault();
 
@@ -119,6 +127,7 @@ async function handleFormSubmit(event) {
   toast.classList.add("success");
 }
 
+// Reroutes user after congrats
 function handleToastAnimationEnd() {
   toast.removeAttribute("class");
   if (shouldNavigateAway) {
@@ -137,6 +146,7 @@ function clearInputs() {
   weightInput.value = "";
 }
 
+// Runs functions when the dropdown value changes
 if (workoutTypeSelect) {
   workoutTypeSelect.addEventListener("change", handleWorkoutTypeChange);
 }
