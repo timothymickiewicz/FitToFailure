@@ -56,25 +56,25 @@ router.put('/api/workouts/:id', (req, res) => {
 });
 
 // Returns all workouts in range
-router.get("/api/workouts/range", ({ body }, res) => {
-Workout.insertMany(body)
+router.get("/api/workouts/range", (req, res) => {
+Workout.find({})
     .then(dbFitness => {
-    res.json(dbFitness);
+      res.json(dbFitness);
     })
     .catch(err => {
-    res.status(400).json(err);
+      console.log(err);
     });
 });
 
 // Gets the last workout
 router.get("/api/workouts", (req, res) => {
-Workout.find({})
+  Workout.find({})
     .sort({ date: -1 })
     .then(dbFitness => {
     res.json(dbFitness);
     })
     .catch(err => {
-    res.status(400).json(err);
+      res.status(400).json(err);
     });
 });
 
