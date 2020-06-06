@@ -1,5 +1,5 @@
 const express = require('express');
-const Fitness = require("../models/fitness.js");
+const Workout = require("../models/workout.js");
 const router = express.Router();
 
 // if (workoutType === "cardio") {
@@ -20,7 +20,7 @@ const router = express.Router();
 // Adds a new workout
 // Runs immediately on page load
 router.post('/api/workouts', ({ body }, res) => {
-  Fitness.create(body)
+  Workout.create(body)
     .then(dbFitness => {
       console.log("running api workouts call");
       res.json(dbFitness);
@@ -32,21 +32,32 @@ router.post('/api/workouts', ({ body }, res) => {
 
 // Updates an exercise
 router.put('/api/workouts/:id', (req, res) => {
-  // var query  = Employee.where({ _id: req.params.employee_id });
+  console.log("running api/workouts/id call");
+  var query  = Workout.where({ _id: req.params.id });
+  console.log(req.body);
   console.log(req.params.id);
-    // Fitness.insertMany(body)
-    //   .then(dbFitness => {
-    //     console.log("running api/workouts/id call");
-    //     res.json(dbFitness);
-    //   })
-    //   .catch(err => {
-    //     res.status(400).json(err);
-    //   });
+    Workout.updateOne(
+      query, 
+      {
+        $set: {
+          day: new Date().setDate(new Date().getDate()),
+        },
+        $push: {
+          exercises: [ { type: req.body.type, name: req.body.name, weight: req.body.weight, sets: req.body.sets, reps: req.body.reps, duration: req.body.duration } ]
+      }})
+      .then(dbFitness => {
+        res.json(dbFitness);
+        console.log("success: " + dbFitness);
+      })
+      .catch(err => {
+        res.status(400).json(err);
+        console.log(err);
+      });
 });
 
 // Returns all workouts in range
 router.get("/api/workouts/range", ({ body }, res) => {
-Fitness.insertMany(body)
+Workout.insertMany(body)
     .then(dbFitness => {
     res.json(dbFitness);
     })
@@ -57,7 +68,7 @@ Fitness.insertMany(body)
 
 // Gets the last workout
 router.get("/api/workouts", (req, res) => {
-Fitness.find({})
+Workout.find({})
     .sort({ date: -1 })
     .then(dbFitness => {
     res.json(dbFitness);
