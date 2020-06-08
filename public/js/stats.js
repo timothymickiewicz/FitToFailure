@@ -58,6 +58,7 @@ function populateChart(data) {
       ],
       datasets: [
         {
+          // Broken
           label: "Workout Duration In Minutes",
           backgroundColor: "red",
           borderColor: "red",
@@ -186,15 +187,42 @@ function populateChart(data) {
   });
 }
 
-function duration(data) {
+function duration(dbFitness) {
+  // let modifiedResponse = [];
+  // let exercisesCombined = 0;
+  // let day = dbFitness[0].day.slice(0, 10);
+  // console.log(day);
+  // dbFitness.forEach(workout => {
+  //   console.log(exercisesCombined);
+  //   let currentDay = workout.day.slice(0, 10);
+  //   let workoutDuration = 0;
+  //   workout.exercises.forEach(exercise => {
+  //     workoutDuration += exercise.duration;
+  //     console.log(workoutDuration);
+  //   });
+  //   if (currentDay === day) {
+  //     exercisesCombined += workoutDuration;
+  //     day = currentDay;
+  //     return
+  //   }
+  //   else {
+  //     modifiedResponse.push(exercisesCombined);
+  //     exercisesCombined = 0;
+  //     day = currentDay;
+  //     return
+  //   }
+  // });
+  // if (modifiedResponse.length === 0) {
+  //   modifiedResponse.push(exercisesCombined);
+  // }
+  // console.log(modifiedResponse);
   let durations = [];
 
-  data.forEach(workout => {
+  dbFitness.forEach(workout => {
     workout.exercises.forEach(exercise => {
       durations.push(exercise.duration);
     });
   });
-
   return durations;
 }
 
